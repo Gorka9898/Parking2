@@ -47,9 +47,9 @@ class controladorCoches extends Controller
         {
             $request->validate([
 
-                'matricula'=>'required |max:7',
-                'marca'=>'required',
-                'modelo'=>'required'
+                'matricula'=>'required |regex:/[a-zA-Z]{3}[0-9]{4}/',
+                'marca'=>'required||min:3 |max:15',
+                'modelo'=>'required |min:1 |max:15',
                
              ]);         
            
