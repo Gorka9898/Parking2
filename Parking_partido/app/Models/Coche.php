@@ -15,4 +15,10 @@ class Coche extends Model
         'marca',
         'modelo'
     ];
+
+
+    public function Usuario()
+    {
+        return $this->belongsTo('App\Models\Usuario');
+    }
 }

@@ -13,12 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function(Blueprint $tabla){
+        Schema::create('coches', function(Blueprint $tabla){
             $tabla->id();
-            $tabla->string('nombre');
-            $tabla->string('apellido');
+            $tabla->string('matricula');
+            $tabla->string('marca');
+            $tabla->string('modelo');
+
+            $tabla->unsignedBigInteger('usuario_id')->nullable();
+            $tabla->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
+
+
             $tabla->timestamps();
         });
+
+
     }
 
     /**
@@ -28,6 +36,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('coches');
+        
     }
 };

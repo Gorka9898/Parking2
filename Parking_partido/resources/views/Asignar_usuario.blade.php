@@ -39,6 +39,16 @@
     @enderror   
    
     <br>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;Email: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="email"><br><br>
+    
+    @error('email')
+    <div class="alert alert-danger">
+        {{ $message }} 
+    </div>
+    @enderror   
+   
+    <br>
  
    
     <div style="width: 100%;margin: 20px;">

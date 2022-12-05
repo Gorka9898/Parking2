@@ -12,5 +12,11 @@ class Usuario extends Model
     protected $fillable = [
         'nombre',
         'apellido',
+        'email',
     ];
+
+    public function coches()
+    {
+        return $this->hasMany('App\Models\Coche');
+    }
 }

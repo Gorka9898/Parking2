@@ -143,12 +143,14 @@ class controladorCoches extends Controller
 
             'nombre'=>'required |max:7',
             'apellido'=>'required',
+            'email'=> 'required | email',
            
          ]);
        
     $usuario= new Usuario;
         $usuario->nombre= $request['nombre'];
         $usuario->apellido= $request['apellido'];
+        $usuario->email= $request['email'];
     // add other fields
     $usuario->save();
 
