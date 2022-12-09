@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Coche;
 use App\Models\Usuario;
+use Illuminate\Http\Request;
 
 class controladorCoches extends Controller
 {
@@ -15,7 +15,7 @@ class controladorCoches extends Controller
      */
     public function index()
     {
-        $coche=Coche::all();
+        $coche = Coche::all();
         return view("inicio")->with("elCoche", $coche);
     }
 
@@ -35,36 +35,27 @@ class controladorCoches extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+
+    public function store(Request $request)
     {
-        $coche = Coche::find($id);
-        $coche->delete();
+        $request->validate([
 
-        return redirect('/lista');
-        
-    }
-        public function store(Request $request)
-        {
-            $request->validate([
+            'matricula' => 'required |regex:/[a-zA-Z]{3}[0-9]{4}/',
+            'marca' => 'required||min:3 |max:15',
+            'modelo' => 'required |min:1 |max:15',
 
-                'matricula'=>'required |regex:/[a-zA-Z]{3}[0-9]{4}/',
-                'marca'=>'required||min:3 |max:15',
-                'modelo'=>'required |min:1 |max:15',
-               
-             ]);         
-           
-        $coche= new Coche;
-            $coche->matricula= $request['matricula'];
-            $coche->marca= $request['marca'];
-            $coche->modelo= $request['modelo'];
+        ]);
+
+        $coche = new Coche;
+        $coche->matricula = $request['matricula'];
+        $coche->marca = $request['marca'];
+        $coche->modelo = $request['modelo'];
         // add other fields
         $coche->save();
-               
-            return redirect('/crear',);
-        }
-  
-    
-    
+
+        return redirect('/crear', );
+    }
+
     public function crear_coches_formulario()
     {
         return view("Nuevo_coche");
@@ -78,8 +69,8 @@ class controladorCoches extends Controller
      */
     public function lista()
     {
-        $coche=Coche::all();
-        return view("Lista_coches")->with("elCoche", $coche);
+        $usuario = Usuario::all();
+        return view("Lista_coches")->with("elUsuario", $usuario);
     }
 
     /**
@@ -95,7 +86,7 @@ class controladorCoches extends Controller
         } else {
             $cocheB = Coche::all();
         }
-    
+
         return view('Buscar_coche')->with('cocheB', $cocheB);
         //return view("Buscar_coche");
     }
@@ -108,51 +99,49 @@ class controladorCoches extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function asignar_usuario(Request $request)   
+    public function asignar_usuario(Request $request)
     {
 
         return redirect('/devUser');
     }
 
-    public function devolver_usuario(Request $request)   
+    public function devolver_usuario(Request $request)
     {
 
         return view("Asignar_usuario");
     }
 
-
-    public function asignar(Request $request)   
+    public function asignar(Request $request)
     {
 
-            $coche=Coche::all();
-            $usuario=Usuario::all();
+        $coche = Coche::all();
+        $usuario = Usuario::all();
 
-        return view('Coche_a_Usuario',["elCoche"=> $coche],["elUsuario"=> $usuario]);
+        return view('Coche_a_Usuario', ["elCoche" => $coche], ["elUsuario" => $usuario]);
     }
 
-    public function Validar_asignacion(Request $request)   
+    public function Validar_asignacion(Request $request)
     {
 
         return view('Coche_a_Usuario');
     }
-    
 
     public function validar_usuario(Request $request)
     {
         $request->validate([
 
-            'nombre'=>'required |max:7',
-            'apellido'=>'required',
-            'email'=> 'required | email',
-           
-         ]);
-       
-    $usuario= new Usuario;
-        $usuario->nombre= $request['nombre'];
-        $usuario->apellido= $request['apellido'];
-        $usuario->email= $request['email'];
-    // add other fields
-    $usuario->save();
+            'nombre' => 'required |max:7',
+            'apellido' => 'required',
+            'email' => 'required | email',
+
+        ]);
+
+        $usuario = new Usuario;
+        $usuario->nombre = $request['nombre'];
+        $usuario->apellido = $request['apellido'];
+        $usuario->email = $request['email'];
+        // add other fields
+        $usuario->save();
 
         return view('Asignar_usuario');
     }
@@ -172,7 +161,46 @@ class controladorCoches extends Controller
             $cocheB = Coche::all();
         }
 
-
         return view("Buscar_coche")->with('cocheB', $cocheB);
+    }
+
+    public function coche_y_usuario(Request $request)
+    {
+
+        $request->validate([
+
+            'matricula' => 'required |regex:/[a-zA-Z]{3}[0-9]{4}/',
+            'marca' => 'required||min:3 |max:15',
+            'modelo' => 'required |min:1 |max:15',
+
+        ]);
+        $coche = new Coche;
+        $coche->matricula = $request['matricula'];
+        $coche->marca = $request['marca'];
+        $coche->modelo = $request['modelo'];
+
+        $coche->save();
+
+
+        if ($request->get('nombre')==null) {
+            $usuario= Usuario::find($request->get("sel_usuario"));
+            $usuario->coches()->save($coche);
+        }else{
+
+            $usuario = new Usuario;
+            $usuario->nombre = $request['nombre'];
+            $usuario->apellido = $request['apellido'];
+            $usuario->email = $request['email'];
+    
+            $usuario->save();
+
+            $usuario->coches()->save($coche);
+        }
+
+        $usuario = Usuario::all();
+
+        return view("Coche_a_Usuario", ["elUsuario" => $usuario]);
+
+
     }
 }

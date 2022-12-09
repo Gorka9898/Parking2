@@ -26,7 +26,7 @@
             <a href="{{ route('Lista_coches') }}">Lista</a>&nbsp;&nbsp;
             <a  href="{{ route('Buscar_coche') }}">Buscar</a>&nbsp;&nbsp;
             <a  href="{{ route('Asignar_usuario') }}">Añadir Usuarios</a>&nbsp;&nbsp;
-            <a href="{{route('Asignar')}}">Asignar coche a Usuario</a>&nbsp;&nbsp;
+            <a href="{{route('Asignar')}}">Crear coche y usuario</a>&nbsp;&nbsp;
 
 
         </div>

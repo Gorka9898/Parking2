@@ -24,28 +24,72 @@
 
 </div>
 
-<h5 style="margin: 20px; margin-left:35px" class="col-12">Usuario</h5>
 
-<form method="post" action="{{route('Validar_asignacion')}}">
+
+<form method="post" action="{{route('Coche_y_usuario')}}">
     {{ csrf_field() }}
-    &nbsp;&nbsp;&nbsp;&nbsp; Usuario: <select name="sel_usuario" id="sel_usuario">
-        <option value="Seleccione_Usuario">Seleccione Usuario</option>
-        @foreach($elUsuario as $users)
-        <option value="{{$users->nombre}}">{{$users->nombre}}</option>
-        @endforeach
-    </select><br><br>
+
+    <br>
+    <h1 style="margin: 20px; margin-left:35px" class="col-12">Coche</h1>
+
+    &nbsp;&nbsp;&nbsp;&nbsp; Matricula: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="matricula"><br><br>
     
-    @error('nombre')<div class="alert alert-danger">
+    @error('matricula')<div class="alert alert-danger">
         {{ $message }} </div>
     @enderror   
 
     <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;Coche: <select name="sel_coche" id="sel_coche">
-        <option value="Seleccione_Coche">Seleccione Coche</option>
-        @foreach($elCoche as $datos)
-        <option value="{{$datos->matricula}}">{{$datos->matricula}}</option>
+    &nbsp;&nbsp;&nbsp;&nbsp;Marca: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="marca"><br><br>
+    
+    @error('marca')
+    <div class="alert alert-danger">
+        {{ $message }} 
+    </div>
+    @enderror   
+   
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Modelo: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="modelo"><br><br>
+    
+    @error('modelo')
+    <div class="alert alert-danger">
+        {{ $message }}
+    </div>
+    @enderror   
+    
+
+    <br>
+    <h1 style="margin: 20px; margin-left:35px" class="col-12">Usuario</h1>
+    @error('nombre')<div class="alert alert-danger">
+        {{ $message }} </div>
+    @enderror   
+
+
+    &nbsp;&nbsp;&nbsp;&nbsp; Nombre: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="nombre"><br><br>
+    
+ 
+
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;Apellido: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="apellido"><br><br>
+    
+
+   
+    <br>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;Email: <input type="text" class="col-12" style="width:60%; margin-left:4%;" name="email"><br><br>
+    
+
+   
+    <br> 
+    
+    
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; Usuario: <select name="sel_usuario" id="sel_usuario">
+        <option value="Seleccione_Usuario">Seleccione Usuario</option>
+        @foreach($elUsuario as $users)
+        <option value="{{$users->id}}">{{$users->nombre}}</option>
         @endforeach
     </select><br><br>
+
     
    
     <br>

@@ -31,33 +31,33 @@
 
     <tr>
         <td>
-            <b>Matricula</b>
+            <b>Nombre</b>
         </td>
         <td>
-            <b>Marca</b>
+            <b>Apellido</b>
         </td>
         <td>
-            <b>Modelo</b>
+            <b>Correo</b>
         </td>
         <td>
-            <b>Botones de borrado</b>
+            <b>Coches asignados</b>
         </td>
     </tr>
-<!--aqui va each-->@foreach($elCoche as $data)<!--Esto es un each camuflado-->
+<!--aqui va each-->@foreach($elUsuario as $data)<!--Esto es un each camuflado-->
 
         
                         
         <tr>    
-            <td>{{$data->matricula}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>{{$data->marca}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td>{{$data->modelo}}&nbsp;&nbsp;&nbsp;&nbsp;</td>             
+            <td>{{$data->nombre}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{{$data->apellido}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{{$data->email}}&nbsp;&nbsp;&nbsp;&nbsp;</td>             
 
 
             <td>
-                <form method="POST" action="{{route('borrar_coche', [$data->id])}}" ><!-- Meter el action con variable e id -->
-                    {{ csrf_field() }}
-                    @method('delete')<input type="submit" name="borrar_tarea"class="bg-danger" value="borrar_tarea">
-                </form>
+                @foreach($data->coches as $datos)
+                {{ $datos->matricula }}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                @endforeach
             </td>
 
         </tr>

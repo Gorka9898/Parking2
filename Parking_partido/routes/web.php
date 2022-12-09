@@ -50,5 +50,11 @@ Route::get('/valAsign', [controladorCoches::class, 'validar_asignacion'])->name(
 
 
 
+Route::post('/asignar2/crear', [controladorCoches::class, 'coche_y_usuario'])->name('Coche_y_usuario');
+
+
+
+
+
 
 
