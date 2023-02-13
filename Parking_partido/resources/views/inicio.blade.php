@@ -21,8 +21,9 @@
             <div style="border:1px solid black; margin-bottom:50px;background-color:lightblue; border-radius:1%;height:60px; display:flex;align-items:center">
             <h1 style="width:80%; float:left">Lista Coches</h1>
 
-            
-            <a  href="{{ route('Nuevo_coche') }}">Añadir</a>&nbsp;&nbsp;
+            <a  href="{{ route('api_user') }}">Api usuarios y coches</a>&nbsp;&nbsp;
+            <a  href="{{ route('api_ultimos') }}">Api ultimos</a>&nbsp;&nbsp;
+            <a  href="{{ route('Nuevo_coche') }}">Añadir Coche</a>&nbsp;&nbsp;
             <a href="{{ route('Lista_coches') }}">Lista</a>&nbsp;&nbsp;
             <a  href="{{ route('Buscar_coche') }}">Buscar</a>&nbsp;&nbsp;
             <a  href="{{ route('Asignar_usuario') }}">Añadir Usuarios</a>&nbsp;&nbsp;
