@@ -203,4 +203,23 @@ class controladorCoches extends Controller
 
 
     }
+
+
+
+
+    public function api_user()
+    {
+
+       $api_user= Usuario::all()->sortBy("apellido");
+       
+       return $api_user;
+    }
+
+    public function api_ultomos_10()
+    {
+
+       $api_coche= Coche::latest()->take(10)->get();
+       
+       return $api_coche;
+    }
 }
